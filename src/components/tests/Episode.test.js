@@ -28,13 +28,42 @@ test("renders the summary test passed as prop", ()=>{
         //Act 3
         // episodes = screen.queryAllByTestId('episodes-container');
         const summary = screen.queryByText(/Chapter One/i);
-        console.log("summary", summary)
+        // console.log("summary", summary)
         //Assert 3
         expect(summary).toBeInTheDocument();
         expect(summary).toHaveTextContent(/Chapter One/i);
       
 });
-
+const testEpisodeWithoutImage = {
+    id:1,
+    name: "",
+    image: null,
+    season: 1,
+    number: 1,
+    summary: "The premier episode, where it all begins..",
+    runtime: 1
+}
 test("renders default image when image is not defined", ()=>{
+
+
+
+        //Arrange 2
+        // render(<Episode episode={
+        //     {id:1,name: "",image: null,season: 1,number: 1,summary: "Chapter One",runtime: 1}
+        // }/>)
+        render(<Episode episode={testEpisodeWithoutImage} />);
+    
+        //Act 3
+        // episodes = screen.queryAllByTestId('episodes-container');
+        const img = screen.queryAllByRole('image');
+        const imgAlt = screen.queryByAltText('https://i.ibb.co/2FsfXqM/stranger-things.png');
+        console.log("image", img)
+        console.log("image Alt", imgAlt)
+        //Assert 3
+        expect(img).toBeInTheDocument;
+        expect(img).toHaveLength(0);
+        expect(imgAlt).toBeInTheDocument;
+        expect(imgAlt).toBeTruthy();
+
 
 });
